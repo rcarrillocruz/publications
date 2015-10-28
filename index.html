@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
 <head>
-<title>Publication Title CHANGE ME</title>
+<title>Automating baremetal deployment with Bifrost</title>
 <meta name="generator" content=
 "HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,21 +33,106 @@ src="graphics/openstack-cloud-software-horizontal-small.png" /></div>
   <img class="hidden" src="graphics/bullet-nofold-dim.gif" alt="" />
   <img class="hidden" src="graphics/bullet-unfold-dim.gif" alt="" />
   <img src="graphics/openstack-cloud-software-vertical-large.png" alt="OpenStack logo" class="cover" />
-  <h1>Publication Title CHANGE ME<br />
-  <span class="smaller">Publication SubTitle CHANGE ME</span></h1>
+  <h1>Automating baremetal deployment with Bifrost<br /></h1>
   <hr />
-  <div class="smaller">Your Name CHANGE ME
-    &lt;<a href="mailto:changeme@example.com">changeme@example.com</a>&gt;</div>
+  <div class="smaller">Ricardo Carrillo Cruz
+    &lt;<a href="mailto:ricardo.carrillo.cruz@gmail.com">ricardo.carrillo.cruz@gmail.com</a>&gt;</div>
 </div>
 
 <div class="slide">
-  <h1>OpenStack</h1>
+  <h1>Introduction</h1>
 
-  <p>This is the first slide. CHANGE ME and add many more.</p>
+  <p>
+    <ul>
+      <li>Cloud Automation Engineer</li>
+      <li>Manage CI platform for HP Cloud products</li>
+      <li>CI is based in OpenStack Infra</li>
+    </ul>
+  </p>
 
-  <center>
-    <img src="images/openstack-software-diagram.png"/>
-  </center>
+</div>
+
+<div class="slide">
+  <h1>Problem</h1>
+
+  <p>
+    <ul>
+      <li>Teams require tests to be run on baremetal</li>
+      <li>Baremetal lab with more than 120 servers, keeps growing</li>
+      <li>Provisioning a manual process, which means:</li>
+        <ul>
+          <li>Slow</li>
+          <li>Tedious</li>
+          <li>Error prone</li>
+          <li>Not scalable</li>
+        </ul>
+    </ul>
+  </p>
+
+</div>
+
+<div class="slide">
+  <h1>Requirements</h1>
+
+  <p>
+    <ul>
+      <li>Easy to install</li> 
+      <li>Easy to operate</li>
+      <li>Easy to hook our configuration management tool</li>
+      <li>Deploys are fast</li>
+    </ul>
+  </p>
+
+</div>
+<div class="slide">
+  <h1>Alternatives</h1>
+
+  <p>
+    <ul>
+      <li>Cobbler</li>
+      <li>Foreman</li>
+      <li>Ironic?</li>
+    </ul>
+  </p>
+
+</div>
+
+<div class="slide">
+  <h1>Ironic standalone + Ansible = Bifrost</h1>
+
+  <p>
+    Excerpt from Bifrost documentation:
+    <br/>
+    <br/>
+    <em>
+      Bifrost is a collection of Ansible playbooks to install Ironic
+      in standalone mode and enroll and deploy servers
+    </em>
+    <br/>
+    <br/>
+    Bifrost installs Ironic in a stand-alone fashion:</p>
+    <ul>
+      <li>No Keystone needed, Ironic API access allowed without password</li>
+      <li>No Neutron needed, dnsmasq provides DHCP/PXE service and static IP injection is done via config-drive</li>
+      <li>Deployments are performed with the IPA (Ironic Python Agent)</li>
+    </ul>
+  </p>
+
+</div>
+
+<div class="slide">
+  <h1>How it works?</h1>
+
+  <p>
+    <ol>
+      <li>Configure global vars to setup environment</li>
+      <li>Create baremetal inventory</li>
+      <li>Run install playbook</li>
+      <li>Run enroll playbook</li>
+      <li>Run deploy playbook</li>
+    </ol>
+  </p>
+
 </div>
 
 <div class="slide">
@@ -56,7 +141,13 @@ src="graphics/openstack-cloud-software-horizontal-small.png" /></div>
   <p><img src="images/stack-o-pancakes-150x150.png"/>
 
   <p>
-    These slides available at: <a href="http://docs.openstack.org/infra/publications/">http://docs.openstack.org/infra/publications/</a>
+    Bifrost can be pulled from: <a href="http://git.openstack.org/cgit/openstack/bifrost">http://git.openstack.org/cgit/openstack/bifrost</a>
+    <br />
+    <br />
+    These slides can be found at: <a href="https://github.com/rcarrillocruz/publications/tree/automating-bm-with-bifrost">https://github.com/rcarrillocruz/publications/tree/automating-bm-with-bifrost</a>
+    <br />
+    <br />
+    You can reach me on my twitter @rcarrillocruz or by email at ricardo.carrillo.cruz@gmail.com.
   </p>
 
 </div>
