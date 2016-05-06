@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-US">
 <head>
-<title>Publication Title CHANGE ME</title>
+<title>Deploying multiple OpenStack clouds with Ansible</title>
 <meta name="generator" content=
 "HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,30 +33,167 @@ src="graphics/openstack-cloud-software-horizontal-small.png" /></div>
   <img class="hidden" src="graphics/bullet-nofold-dim.gif" alt="" />
   <img class="hidden" src="graphics/bullet-unfold-dim.gif" alt="" />
   <img src="graphics/openstack-cloud-software-vertical-large.png" alt="OpenStack logo" class="cover" />
-  <h1>Publication Title CHANGE ME<br />
-  <span class="smaller">Publication SubTitle CHANGE ME</span></h1>
+  <h1>Deploying multiple OpenStack clouds with Ansible<br />
+  <span class="smaller">(in a data-driven fashion)</span></h1>
   <hr />
-  <div class="smaller">Your Name CHANGE ME
-    &lt;<a href="mailto:changeme@example.com">changeme@example.com</a>&gt;</div>
+  <div class="smaller">Ricardo Carrillo Cruz
+    &lt;<a href="mailto:ricardo.carrillo.cruz@gmail.com">ricardo.carrillo.cruz@gmail.com</a>&gt;</div>
 </div>
 
 <div class="slide">
-  <h1>OpenStack</h1>
-
-  <p>This is the first slide. CHANGE ME and add many more.</p>
-
-  <center>
-    <img src="images/openstack-software-diagram.png"/>
-  </center>
-</div>
-
-<div class="slide">
-  <h1>Thanks!</h1>
-
-  <p><img src="images/stack-o-pancakes-150x150.png"/>
+  <h1>Who am I?</h1>
 
   <p>
-    These slides available at: <a href="http://docs.openstack.org/infra/publications/">http://docs.openstack.org/infra/publications/</a>
+    <ul>
+      <li>OpenStack Software Engineer at HPE</li>
+      <li>Work in team focused on doing OpenStack upstream</li>
+      <li>Specialized in OpenStack Infra</li>
+      <li>Lots of interest in Ansible and automation in general</li>
+    </ul>
+  </p>
+
+</div>
+
+<div class="slide">
+  <h1>What's Ansible?</h1>
+
+  <p>
+    <ul>
+      <li>Ansible is an automation tool</li>
+      <li>Can be used for configuration management, application deployment, cloud provisioning <b>and</b> orquestration</li>
+      <li>Uses YAML as idiom to express things</li>
+      <li>Free and open-source</li>
+      <li>Easy to learn and comes with <b>lots</b> of out-of-the-box modules to automate all the various IT tasks</li>
+      <li></li>
+    </ul>
+  </p>
+
+</div>
+
+<div class="slide">
+  <h1>Ansible OpenStack modules</h1>
+
+  <p>
+    <ul>
+      <li>Ansible has a wide variety of OpenStack modules</li>
+      <li>These modules allow you to deploy the expected resources you use in OpenStack (servers, volumes, networks, projects, etc)</li>
+      <li>They leverage OSCC tool to define clouds details (auth urls, credentials, versions, etc)</li>
+
+    </ul>
+  </p>
+
+</div>
+
+<div class="slide">
+  <h1>Example on how to create an OpenStack server with Ansible</h1>
+      <pre>
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+  - os_server:
+      cloud: yaycloud
+      name: nagios
+      image: ubuntu-trusty 
+      key_name: bootstrap-key 
+      flavor: m1.small 
+      network: test-net
+      </pre>
+</div>
+
+<div class="slide">
+  <h1>Problems of playbook with plain OpenStack modules approach</h1>
+
+  <p>
+    <ul>
+      <li>Playbooks become unwieldy on mid-large setups with lots of resources</li>
+      <li>If we manage multiple clouds with similar resources we end up with multiple playbooks repeating the same Ansible code</li>
+      <li>Need to keep an order on the resources creation</li>
+    </ul>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Requirements to better provision multiple clouds</h1>
+    <ul>
+      <li>Decouple configuration from code (our clouds layouts from Ansible code)</li>
+      <li>Be able to define clouds resources in a declarative way</li>
+      <li>Be able to define as many resources as we want, on as many clouds as we like</li>
+      <li>Be able to re-use common resources on multiple clouds without repeating ourselves
+      </li>
+    </ul>
+</div>
+
+<div class="slide">
+  <h1>ansible-openstack-cloud-launcher (AOCL) role</h1>
+    <ul>
+      <li>Consumes a resources YAML file that declares OpenStack resources</li>
+      <li>Role expects the resources YAML file follows a super-minimal 'DSL'<li>
+      <li>Order of resources is not important</li>
+      <li>Accepts 'profiles' of resources to re-use common resources in multiple clouds</li>
+      <li>Accepts per-cloud specific resources</li>
+    </ul>
+</div>
+
+<div class="slide">
+  <h1>Example of resources.yml</h1>
+  <pre>
+profiles:
+  - name: bootstrap-keypair
+    keypairs:
+      - name: bootstrap-key
+        public_key_file: /home/vagrant/.ssh/id_rsa.pub
+  - name: monitoring
+    servers:
+      - name: nagios
+        image: ubuntu-trusty
+        key_name: bootstrap-key
+        flavor: m1.small
+clouds:
+  - name: awesomecloud
+    profiles:
+      - bootstrap-keypair
+      - monitoring
+  - name: yaycloud
+    servers:
+      - name: logserver
+        image: centos7
+        flavor: m1.large
+  </pre>
+</div>
+
+<div class="slide">
+  <h1>Example of AOCL role play</h1>
+  <p>
+  <ul>
+  <li>Create your own <em>resources.yml</em> as shown on previous slide</li>
+  <li>Create a playbook named <em>test_aocl.yml</em> with contents:</li>
+  <pre>
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - { role: ansible-openstack-cloud-launcher }
+  </pre>
+  <li>Run <em>ansible-playbook -i ‘localhost,’ test_aocl.yml -e “@resources.yml”</em></li>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Thank you!</h1>
+  <p>
+    The ansible-openstack-cloud-launcher role is available at: <a href="https://github.com/rcarrillocruz/ansible-openstack-cloud-launcher/">https://github.com/rcarrillocruz/ansible-openstack-cloud-launcher/</a>
+  </p>
+  <p>
+    A blogpost showing the role in detail can be seen at: <a href="http://rcarrillocruz.com/deploying-multiple-openstack-clouds-with-ansible-in-a-data-driven-fashion/">http://rcarrillocruz.com/deploying-multiple-openstack-clouds-with-ansible-in-a-data-driven-fashion/</a>
+  </p>
+
+  <p>IRC: rcarrillocruz
+  </p>
+  
+  <p>Twitter: @rcarrillocruz
   </p>
 
 </div>
