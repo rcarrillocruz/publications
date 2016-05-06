@@ -33,21 +33,144 @@ src="graphics/openstack-cloud-software-horizontal-small.png" /></div>
   <img class="hidden" src="graphics/bullet-nofold-dim.gif" alt="" />
   <img class="hidden" src="graphics/bullet-unfold-dim.gif" alt="" />
   <img src="graphics/openstack-cloud-software-vertical-large.png" alt="OpenStack logo" class="cover" />
-  <h1>Publication Title CHANGE ME<br />
-  <span class="smaller">Publication SubTitle CHANGE ME</span></h1>
+  <h1>Introduction to OpenStack with DevStack<br /></h1>
   <hr />
-  <div class="smaller">Your Name CHANGE ME
-    &lt;<a href="mailto:changeme@example.com">changeme@example.com</a>&gt;</div>
+  <div class="smaller">Ricardo Carrillo Cruz
+    &lt;<a href="mailto:ricardo.carrillo.cruz@gmail.com">ricardo.carrillo.cruz@gmail.com</a>&gt;</div>
 </div>
 
 <div class="slide">
-  <h1>OpenStack</h1>
+  <h1>Who am I?</h1>
+  <p>
+    <ul>
+      <li>OpenStack Software Engineer at HPE</li>
+      <li>Work in team focused on doing OpenStack upstream</li>
+      <li>Formerly member of CI team for HPE Helion product porfolio</li>
+      <li>Specialized in OpenStack Infra</li>
+      <li>Lots of interest in OpenStack, Ansible and automation in general</li>
+    </ul>
+  </p>
+</div>
 
-  <p>This is the first slide. CHANGE ME and add many more.</p>
+<div class="slide">
+  <h1>What is OpenStack?</h1>
+  <p>
+    <ul>
+      <li>An IaaS platform to build clouds</li>
+      <li>Meant to be used for all types of clouds (public/private/hybrid)</li>
+      <li>Simple to implement (getting there!) and operate</li>
+      <li>Feature rich</li>
+      <li>Massively scalable</li>
+    </ul>
+  </p>
+</div>
 
+<div class="slide">
+  <h1>What is OpenStack? (cont)</h1>
+  <p>
+    <ul>
+      <li></li>
+      <li>Base building blocks are compute, networking and storage</li>
+      <li>OpenStack services exposed via APIs</li>
+      <li>Users and applications interact with OpenStack via dashboard, CLIs or various available SDKs</li>
+    </ul>
+  </p>
   <center>
     <img src="images/openstack-software-diagram.png"/>
   </center>
+</div>
+
+<div class="slide">
+  <h1>What is OpenStack? (cont)</h1>
+  <p>Services available on OpenStack clouds thru APIs:
+    <ul>
+      <li>Nova (Compute as a service)</li>
+      <li>Neutron (Network as a service)</li>
+      <li>Cinder (Block-storage as a service)</li>
+      <li>Keystone (Identity service)</li>
+      <li>Glance (Image service)</li>
+      <li>Swift (Object storage)</li>
+      <li>Heat (Orchestration as a service)</li>
+      <li>Trove (Database as a service)</li>
+      <li>Sahara (Big data processing as a service)</li>
+      <li>Magnum (Container orchestrator engine as a service)</li>
+      <li>Many many more...</li>
+    </ul>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>What is OpenStack? (cont)
+  <center>
+    <img src="images/openstack_kilo_conceptual_arch.png" width="75%" height="75%"/>
+  </center>
+</div>
+
+<div class="slide">
+  <h1>What users and companies do with OpenStack</h1>
+    <ul>
+      <li>Automate, automate and automate datacenter operations and maximize resources usage</li>
+      <li>Foundation for virtualizing network functions</li>
+      <li>Provide self-service resources to developers to accelerate product development</li>
+      <li>Provide public cloud services</li>
+      <li>Package and curate OpenStack in distros to provide private cloud services</li>
+      <li>Discover the secrets of the universe (for real, check next slide!)</li>
+    </ul>
+</div>
+
+<div class="slide">
+  <h1>Who uses OpenStack?</h1>
+    <p>
+      <ul>
+        <li>Academic/research: CERN, MIT CSAIL</li>
+        <li>Retail: Walmart, Home Depot</li>
+        <li>Web/eCommerce/SaaS: PayPal, Mercado Libre, BetFair, WorkDay, LivePerson</li>
+        <li>Cloud hosting/telco: Rackspace, Dreamhost, OVH, NTT, Orange, Telefonica, AT&T</li>
+        <li>IT: HPE, IBM, RedHat, Mirantis, SuSe, Cisco, EMC</li>
+        <li>Film/Media/Gaming: Sony, Disney, TWC, Comcast</li>
+        <li>Finance: BBVA, Wells Fargo, AMEX, Visa</li>
+        <li>many, many, many more!</li>
+      </ul>
+    </p>
+</div>
+
+<div class="slide">
+  <h1>Common misconceptions about OpenStack</h1>
+  <p>
+    <ul>
+      <li><em><q>I can create VMs with ESX/KVM/$VIRT, why use OpenStack?</q></em></li>
+      <li><em><q>AWS is awesome and super easy to use, why bother installing OpenStack?</q></em></li>
+      <li><em><q>Docker/Mesos/Kubernetes/containers  is da future, OpenStack is dead</q></em></li>
+      <li><em><q>OpenStack is too difficult to install, need experts to run it</q></em></li>
+    </ul>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Why use OpenStack?</h1>
+  <p>
+    <ul>
+      <li>Open source</li>
+      <li>Open design</li>
+      <li>Open development</li>
+      <li>Open community</li>
+      <li>And most importantly: <q>OpenStack != Code, OpenStack == People</q></li>
+    </ul>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>How to get involved</h1>
+  <p>
+    <ul>
+      <li>Stay on this talk, don't run yet!</li>
+      <li>Visit the OpenStack project home page and bookmark it: <a href="http://www.openstack.org/">http://www.openstack.org/</a></li>
+      <li>Join IRC channels (#openstack, #openstack-dev, #openstack-infra) on freenode</li>
+      <li>Subscribe to mailing lists: <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo">http://lists.openstack.org/cgi-bin/mailman/listinfo</a></li>
+      <li>Ask questions (and answer as you learn!): <a href="https://ask.openstack.org/">https://ask.openstack.org/</a></li>
+      <li>Look for local meetups to hack on OpenStack: <a href="http://www.meetup.com/es-ES/OpenStack-Costa-del-Sol-meetup/">http://www.meetup.com/es-ES/OpenStack-Costa-del-Sol-meetup/</a></li>
+    </ul>
+  </p>
 </div>
 
 <div class="slide">
@@ -56,10 +179,133 @@ src="graphics/openstack-cloud-software-horizontal-small.png" /></div>
   <p><img src="images/stack-o-pancakes-150x150.png"/>
 
   <p>
-    These slides available at: <a href="http://docs.openstack.org/infra/publications/">http://docs.openstack.org/infra/publications/</a>
+    These slides available at: <a href="https://github.com/rcarrillocruz/publications/tree/intro_openstack_devstack">https://github.com/rcarrillocruz/publications/tree/intro_openstack_devstack</a>
+  </p>
+
+  <p>Reference material used for this presentation:</p>
+    <ul>
+      <li>Official documentation from <a href="http://docs.openstack.org">http://docs.openstack.org</a></li>
+      <li><em><q>OpenStack != Code, OpenStack == People</q></em> quote from Colette's Alexander Austin summit <a href="https://www.openstack.org/videos/video/hunting-for-purple-squirrels-hiring-openstack-contributors-in-the-wild">talk</a></li>
+    </ul>
+  <p>
+
+  <p>IRC: rcarrillocruz
+  </p>
+  
+  <p>Twitter: @rcarrillocruz
   </p>
 
 </div>
+
+<div class="slide">
+  <h1>Workshop 1</h1>
+  <h2>Lab or personal laptops requirements</h2>
+  <p>You can either work in teams and access the instances I created on my cloud or create a 6GB RAM at a minimum VM</p>
+</div>
+
+<div class="slide">
+  <h1>Workshop 2</h1>
+  <h2>Install DevStack and explore</h2>
+  <p>
+    <pre>
+      ssh test@&lt;your public instance IP&gt;
+      sudo apt-get update && sudo apt-get -y install git
+      git clone git://git.openstack.org/openstack-dev/devstack
+      cd devstack
+      vi local.conf
+      (Put local.conf contents from https://wiki.openstack.org/wiki/NeutronDevstack)
+      ./stack.sh
+      screen -x
+    </pre>
+  </p>
+  <p>
+    <ul>
+      <li>Check DevStack docs for more information: <a href="http://docs.openstack.org/developer/devstack/">http://docs.openstack.org/developer/devstack/</a></li>
+      <li>Check how to source the DevStack clouds credentials</li>
+      <li>Check the various screen windows</li>
+      <li>Stop and start a foreground service</li>
+    </ul>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Workshop 2</h1>
+  <h2>Keystone</h2>
+  <p>
+    <pre>
+      openstack --os-cloud devstack-admin endpoint list
+      openstack --os-cloud devstack-admin endpoint get &lt;endpoint uuid&gt;
+      openstack --os-cloud devstack-admin domain list
+      openstack --os-cloud devstack-admin domain create mydomain
+      openstack --os-cloud devstack-admin project list
+      openstack --os-cloud devstack-admin project create myproject --domain mydomain
+      openstack --os-cloud devstack-admin user list
+      openstack --os-cloud devstack-admin user create myuser --domain mydomain --project myproject --password secret
+      openstack --os-cloud devstack-admin user show myuser
+    </pre>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Workshop 3</h1>
+  <h2>Glance</h2>
+  <p>
+    <pre>
+      openstack --os-cloud devstack-admin image list
+      wget https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
+      openstack --os-cloud devstack-admin image create ubuntu-trusty --file trusty-server-cloudimg-amd64-disk1.img --public
+      openstack --os-cloud devstack-admin image-show ubuntu-trusty
+    </pre>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Workshop 4</h1>
+  <h2>Neutron</h2>
+  <p>
+    <pre>
+      openstack --os-cloud devstack-admin network list
+      openstack --os-cloud devstack-admin subnet list
+      openstack --os-cloud devstack-admin router list
+      openstack --os-cloud devstack-admin router show router1
+    </pre>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Workshop 5</h1>
+  <h2>Nova</h2>
+  <p>
+    <pre>
+      openstack --os-cloud devstack-admin server list
+      openstack --os-cloud devstack-admin keypair list
+      openstack --os-cloud devstack-admin flavor list
+      ssh-keygen -t rsa -N ""
+      openstack --os-cloud devstack-admin keypair create mykey --public-key ~/.ssh/id_rsa.pub
+      openstack --os-cloud devstack-admin server create myserver --flavor d1 --key-name mykey --image ubuntu-trusty --nic net-id=private
+      openstack --os-cloud devstack-admin ip floating create public
+      openstack --os-cloud devstack-admin ip floating list
+      openstack --os-cloud devstack-admin ip floating add &lt;floating ip from previous command&gt; myserver
+      openstack --os-cloud devstack-admin security group create ssh
+      openstack --os-cloud devstack-admin security group rule create --src-ip 0.0.0.0/0 --dst-port 22 --ingress ssh
+      openstack --os-cloud devstack-admin server add security group myserver ssh
+      ssh -i ~/.ssh/id_rsa ubuntu@&lt;floating ip created earlier&gt;
+    </pre>
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Workshop 6</h1>
+  <h2>Horizon (stop all this CLI, I wanna see what's going on!)</h2>
+  <p>
+    Open a browser and go to http://&lt;your instance IP&gt;, and enter the admin credentials you put when installing DevStack
+  </p>
+</div>
+
+<div class="slide">
+  <h1>Workshop 7</h1>
+  <h2>Freeform</h2>
+  <p>What you want to talk about or try out?</p>
 
 </body>
 </html>
